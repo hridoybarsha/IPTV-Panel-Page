@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SUPER IPTV Management Panel</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-tv"></i>
+            <span>SUPER IPTV</span>
+        </div>
+
+        <nav class="menu">
+
+            <button class="menu-item active" data-page="dashboard">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="menu-item" data-page="users">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+            </button>
+
+            <button class="menu-item" data-page="add-user">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Add Customer</span>
+            </button>
+
+            <button class="menu-item" data-page="payments">
+                <i class="fa-solid fa-credit-card"></i>
+                <span>Payments</span>
+            </button>
+
+            <button class="menu-item" data-page="plans">
+                <i class="fa-solid fa-box"></i>
+                <span>Plans</span>
+            </button>
+
+            <button class="menu-item" data-page="reports">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Reports</span>
+            </button>
+
+            <button class="menu-item" data-page="settings">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button id="themeToggle">
+                <i class="fa-solid fa-moon"></i>
+                <span>Dark Mode</span>
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="topbar-title">
+                <h2 id="pageTitle">Dashboard</h2>
+                <p>SUPER IPTV Management Panel</p>
+            </div>
+
+            <div class="admin-profile">
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Admin</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <section class="content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <div class="page active" id="dashboard">
+
+                <div class="welcome">
+                    <div>
+                        <h1>Welcome Back 👋</h1>
+                        <p>Manage your IPTV customers and subscriptions.</p>
+                    </div>
+
+                    <button class="primary-btn" data-page-link="add-user">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Customer
+                    </button>
+                </div>
+
+
+                <!-- STAT CARDS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div>
+                            <span>Total Users</span>
+                            <h2 id="totalUsers">0</h2>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+
+                        <div>
+                            <span>Active Users</span>
+                            <h2 id="activeUsers">0</h2>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+
+                        <div>
+                            <span>Expired Users</span>
+                            <h2 id="expiredUsers">0</h2>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+
+                        <div>
+                            <span>Total Revenue</span>
+                            <h2>₹<span id="totalRevenue">0</span></h2>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT USERS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h3>Recent Customers</h3>
+                            <p>Latest added customers</p>
+                        </div>
+
+                        <button class="outline-btn" data-page-link="users">
+                            View All
+                        </button>
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Username</th>
+                                    <th>Plan</th>
+                                    <th>Expiry</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="recentUsersTable">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= USERS ================= -->
+
+            <div class="page" id="users">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h1>Customers</h1>
+                        <p>Manage all IPTV customers.</p>
+                    </div>
+
+                    <button class="primary-btn" data-page-link="add-user">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Add Customer
+                    </button>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-search"></i>
+
+                    <input
+                        type="text"
+                        id="userSearch"
+                        placeholder="Search by name, phone or username..."
+                    >
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Phone</th>
+                                    <th>Username</th>
+                                    <th>Plan</th>
+                                    <th>Expiry</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="usersTable">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ADD USER ================= -->
+
+            <div class="page" id="add-user">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h1>Add Customer</h1>
+                        <p>Create a new IPTV subscription.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="panel">
+
+                        <h3>Customer Information</h3>
+
+                        <form id="userForm">
+
+                            <div class="form-group">
+                                <label>Customer Name</label>
+
+                                <input
+                                    type="text"
+                                    id="customerName"
+                                    required
+                                    placeholder="Enter customer name"
+                                >
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Phone Number</label>
+
+                                <input
+                                    type="tel"
+                                    id="customerPhone"
+                                    placeholder="Enter phone number"
+                                >
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Username</label>
+
+                                <input
+                                    type="text"
+                                    id="username"
+                                    required
+                                    placeholder="Enter username"
+                                >
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Password</label>
+
+                                <input
+                                    type="text"
+                                    id="password"
+                                    required
+                                    placeholder="Enter password"
+                                >
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Portal URL</label>
+
+                                <input
+                                    type="url"
+                                    id="portalUrl"
+                                    placeholder="http://example.com"
+                                >
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>Select Plan</label>
+
+                                <select id="plan" required>
+
+                                    <option value="">
+                                        Select Subscription
+                                    </option>
+
+                                    <option value="1 Month">
+                                        1 Month - ₹200
+                                    </option>
+
+                                    <option value="3 Months">
+                                        3 Months - ₹600
+                                    </option>
+
+                                    <option value="6 Months">
+                                        6 Months - ₹1150
+                                    </option>
+
+                                    <option value="12 Months">
+                                        12 Months - ₹2000
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>Payment Status</label>
+
+                                <select id="paymentStatus">
+
+                                    <option value="PAID">
+                                        PAID
+                                    </option>
+
+                                    <option value="PENDING">
+                                        PENDING
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="primary-btn full-btn"
+                            >
+                                <i class="fa-solid fa-save"></i>
+                                Create Customer
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- QR PAYMENT -->
+
+                    <div class="panel">
+
+                        <h3>UPI Payment QR</h3>
+
+                        <p class="muted">
+                            QR will be generated automatically after selecting a plan.
+                        </p>
+
+                        <div id="qrcode" class="qr-box">
+                            <span>Select a plan</span>
+                        </div>
+
+                        <div class="payment-info">
+
+                            <p>
+                                <strong>UPI ID:</strong>
+                                <span id="displayUpi">6289033804@ptsbi</span>
+                            </p>
+
+                            <p>
+                                <strong>Amount:</strong>
+                                ₹<span id="displayAmount">0</span>
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="outline-btn full-btn"
+                            id="downloadQR"
+                        >
+                            <i class="fa-solid fa-download"></i>
+                            Download QR
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PAYMENTS ================= -->
+
+            <div class="page" id="payments">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h1>Payments</h1>
+                        <p>Track customer payments.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Plan</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="paymentsTable">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PLANS ================= -->
+
+            <div class="page" id="plans">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h1>Subscription Plans</h1>
+                        <p>Manage your subscription pricing.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="plans-grid">
+
+                    <div class="plan-card">
+                        <i class="fa-solid fa-calendar"></i>
+                        <h3>1 Month</h3>
+                        <h2>₹200</h2>
+                    </div>
+
+                    <div class="plan-card">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <h3>3 Months</h3>
+                        <h2>₹600</h2>
+                    </div>
+
+                    <div class="plan-card">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <h3>6 Months</h3>
+                        <h2>₹1150</h2>
+                    </div>
+
+                    <div class="plan-card">
+                        <i class="fa-solid fa-star"></i>
+                        <h3>12 Months</h3>
+                        <h2>₹2000</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= REPORTS ================= -->
+
+            <div class="page" id="reports">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h1>Reports</h1>
+                        <p>Overview of your IPTV business.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div>
+                            <span>Total Customers</span>
+                            <h2 id="reportUsers">0</h2>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+
+                        <div>
+                            <span>Active Subscriptions</span>
+                            <h2 id="reportActive">0</h2>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-money-bill"></i>
+                        </div>
+
+                        <div>
+                            <span>Total Payments</span>
+                            <h2 id="reportPayments">0</h2>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SETTINGS ================= -->
+
+            <div class="page" id="settings">
+
+                <div class="page-heading">
+
+                    <div>
+                        <h1>Settings</h1>
+                        <p>Manage your panel configuration.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="form-group">
+
+                        <label>UPI ID</label>
+
+                        <input
+                            type="text"
+                            id="upiSettings"
+                            value="6289033804@ptsbi"
+                        >
+
+                    </div>
+
+
+                    <button
+                        class="primary-btn"
+                        id="saveSettings"
+                    >
+                        <i class="fa-solid fa-save"></i>
+                        Save Settings
+                    </button>
+
+                </div>
+
+
+                <div class="panel backup-panel">
+
+                    <h3>Data Management</h3>
+
+                    <p>
+                        Backup or restore your panel data.
+                    </p>
+
+                    <div class="button-row">
+
+                        <button
+                            class="outline-btn"
+                            id="exportBackup"
+                        >
+                            📤 Export Backup
+                        </button>
+
+                        <label class="outline-btn file-label">
+
+                            📥 Import Backup
+
+                            <input
+                                type="file"
+                                id="importBackup"
+                                accept=".json"
+                            >
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
