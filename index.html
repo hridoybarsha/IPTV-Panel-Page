@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>SUPER IPTV Management Panel</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      <span>SUPER</span> IPTV
+    </div>
+
+    <nav>
+
+      <button class="nav-btn active"
+              data-page="dashboard">
+        🏠 Dashboard
+      </button>
+
+      <button class="nav-btn"
+              data-page="customers">
+        👥 Customers
+      </button>
+
+      <button class="nav-btn"
+              data-page="addCustomer">
+        ➕ Add Customer
+      </button>
+
+    </nav>
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="main">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+      <div>
+        <h2 id="pageTitle">
+          Dashboard
+        </h2>
+
+        <p>
+          SUPER IPTV Management Panel
+        </p>
+      </div>
+
+      <div class="admin">
+        👤 Administrator
+      </div>
+
+    </header>
+
+
+    <!-- =========================
+         DASHBOARD PAGE
+    ========================== -->
+
+    <section id="dashboard"
+             class="page active">
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+
+          <div>
+            <h3>Total Customers</h3>
+            <strong id="totalCustomers">
+              0
+            </strong>
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="stat-icon">🟢</div>
+
+          <div>
+            <h3>Active Customers</h3>
+            <strong id="activeCustomers">
+              0
+            </strong>
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="stat-icon">🔴</div>
+
+          <div>
+            <h3>Expired Customers</h3>
+            <strong id="expiredCustomers">
+              0
+            </strong>
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="stat-icon">💰</div>
+
+          <div>
+            <h3>Total Revenue</h3>
+            <strong id="totalRevenue">
+              ₹0
+            </strong>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <h3>
+            Recent Customers
+          </h3>
+
+          <button class="primary-btn"
+                  id="goAddCustomer">
+            ➕ Add Customer
+          </button>
+
+        </div>
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Username</th>
+                <th>Plan</th>
+                <th>Expiry</th>
+                <th>Status</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="recentCustomersTable">
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CUSTOMERS PAGE
+    ========================== -->
+
+    <section id="customers"
+             class="page">
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <div>
+            <h3>
+              Customer Management
+            </h3>
+
+            <p class="muted">
+              Manage all your IPTV customers
+            </p>
+          </div>
+
+          <button class="primary-btn"
+                  id="goAddCustomer2">
+            ➕ Add Customer
+          </button>
+
+        </div>
+
+
+        <div class="toolbar">
+
+          <input
+            type="text"
+            id="searchCustomer"
+            placeholder="🔍 Search by name, phone or username..."
+          >
+
+          <button class="secondary-btn"
+                  id="refreshCustomers">
+            🔄 Refresh
+          </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Username</th>
+                <th>Plan</th>
+                <th>Amount</th>
+                <th>Start Date</th>
+                <th>Expiry Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="customersTable">
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ADD CUSTOMER PAGE
+    ========================== -->
+
+    <section id="addCustomer"
+             class="page">
+
+      <div class="card form-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <h3>
+              Add New Customer
+            </h3>
+
+            <p class="muted">
+              Create a new IPTV customer
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <form id="customerForm">
+
+
+          <div class="form-grid">
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+              <label>
+                Customer Name *
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                required
+                placeholder="Enter customer name"
+              >
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+              <label>
+                Phone Number *
+              </label>
+
+              <input
+                type="tel"
+                id="phone"
+                required
+                placeholder="9876543210"
+              >
+
+            </div>
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+              <label>
+                Username *
+              </label>
+
+              <input
+                type="text"
+                id="username"
+                required
+                placeholder="Enter username"
+              >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+              <label>
+                Password *
+              </label>
+
+              <input
+                type="text"
+                id="password"
+                required
+                placeholder="Enter password"
+              >
+
+            </div>
+
+
+            <!-- PORTAL -->
+
+            <div class="form-group full">
+
+              <label>
+                Portal URL
+              </label>
+
+              <input
+                type="url"
+                id="portalUrl"
+                placeholder="https://example.com"
+              >
+
+            </div>
+
+
+            <!-- PLAN -->
+
+            <div class="form-group">
+
+              <label>
+                Plan *
+              </label>
+
+              <select id="plan"
+                      required>
+
+                <option value="">
+                  Select Plan
+                </option>
+
+                <option value="1 Month"
+                        data-price="200">
+                  1 Month - ₹200
+                </option>
+
+                <option value="3 Months"
+                        data-price="600">
+                  3 Months - ₹600
+                </option>
+
+                <option value="6 Months"
+                        data-price="1150">
+                  6 Months - ₹1150
+                </option>
+
+                <option value="12 Months"
+                        data-price="2000">
+                  12 Months - ₹2000
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- AMOUNT -->
+
+            <div class="form-group">
+
+              <label>
+                Amount
+              </label>
+
+              <input
+                type="number"
+                id="amount"
+                readonly
+                placeholder="Select plan"
+              >
+
+            </div>
+
+
+            <!-- START DATE -->
+
+            <div class="form-group">
+
+              <label>
+                Start Date *
+              </label>
+
+              <input
+                type="date"
+                id="startDate"
+                required
+              >
+
+            </div>
+
+
+            <!-- EXPIRY -->
+
+            <div class="form-group">
+
+              <label>
+                Expiry Date
+              </label>
+
+              <input
+                type="date"
+                id="expiryDate"
+                readonly
+              >
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="form-group">
+
+              <label>
+                Status
+              </label>
+
+              <select id="status">
+
+                <option value="Active">
+                  Active
+                </option>
+
+                <option value="Expired">
+                  Expired
+                </option>
+
+              </select>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <button
+              type="submit"
+              class="primary-btn">
+              💾 Save Customer
+            </button>
+
+            <button
+              type="reset"
+              class="secondary-btn">
+              Reset
+            </button>
+
+          </div>
+
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       EDIT MODAL
+  ========================== -->
+
+  <div id="editModal"
+       class="modal">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h3>
+          Edit Customer
+        </h3>
+
+        <button id="closeModal"
+                class="close-btn">
+          ✕
+        </button>
+
+      </div>
+
+
+      <form id="editForm">
+
+        <input
+          type="hidden"
+          id="editId"
+        >
+
+
+        <div class="form-grid">
+
+
+          <div class="form-group">
+
+            <label>
+              Name
+            </label>
+
+            <input
+              id="editName"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Phone
+            </label>
+
+            <input
+              id="editPhone"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Username
+            </label>
+
+            <input
+              id="editUsername"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Password
+            </label>
+
+            <input
+              id="editPassword"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Portal URL
+            </label>
+
+            <input
+              id="editPortalUrl"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Plan
+            </label>
+
+            <select id="editPlan">
+
+              <option value="1 Month">
+                1 Month
+              </option>
+
+              <option value="3 Months">
+                3 Months
+              </option>
+
+              <option value="6 Months">
+                6 Months
+              </option>
+
+              <option value="12 Months">
+                12 Months
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Amount
+            </label>
+
+            <input
+              type="number"
+              id="editAmount"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Start Date
+            </label>
+
+            <input
+              type="date"
+              id="editStartDate"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Expiry Date
+            </label>
+
+            <input
+              type="date"
+              id="editExpiryDate"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Status
+            </label>
+
+            <select id="editStatus">
+
+              <option value="Active">
+                Active
+              </option>
+
+              <option value="Expired">
+                Expired
+              </option>
+
+            </select>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            class="primary-btn">
+            💾 Update Customer
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div id="toast"
+       class="toast">
+  </div>
+
+
+  <!-- Firebase + App -->
+
+  <script type="module"
+          src="script.js">
+  </script>
+
+</body>
+</html>
